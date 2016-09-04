@@ -15,9 +15,10 @@ var getStudents = function () {
       //add ajax data to our studentArray
       students = data.students;
       console.log(students);
-      $('#studentInfo').html("<p>" + students[0].first_name + " " + students[0].last_name + "<br>" + students[0].info);
+      $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
       //console.log(students[0]);
       updateCounter();
+      displayButtons();
     }
   });
 
@@ -31,10 +32,10 @@ var displayStudentsLeft = function () {
   //rotate back to 18 if it hits 0
   if (now === 0){
     now = 17;
-    $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+    displayStudent(now);
   }else{
     now --;
-    $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+    displayStudent(now);
   }
   updateCounter();
 };//end displayStudentsLeft
@@ -44,14 +45,29 @@ var displayStudentsRight = function() {
   //rotate back to 0 if it hits 18
   if (now === 17){
     now = 0;
-    $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+    displayStudent(now);
   }else{
-  now ++;
-  $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+    now ++;
+    displayStudent(now);
 }
 updateCounter();
 };
 
 var updateCounter = function () {
-  $('.counter').html("<p>" + (now + 1) + "/18</p>")
+  $('.counter').html("<p>" + (now + 1) + "/18</p>");
+};
+
+var displayButtons = function () {
+  for (var i = 0; i < students.length; i++) {
+    $('.buttons').append("<button onClick='displayStudent(" + i + ")'>" + students[i].first_name + " " + students[i].last_name + "</button>");
+  }
+};
+
+var displayStudent = function(index){
+  now = index;
+  $('#studentInfo').fadeOut(1000, function(){
+    $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+    updateCounter();
+  });
+  $('#studentInfo').fadeIn(1000);
 };
