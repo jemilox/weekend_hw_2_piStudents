@@ -76,7 +76,7 @@ var displayStudent = function(index){
 var moveToNextStudent = setInterval(function(){
   timer ++;
   console.log(timer);
-  if (timer === 8){
+  if (timer === 10){
     timer = 0;
   displayStudentsRight();
   }
