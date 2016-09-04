@@ -17,6 +17,7 @@ var getStudents = function () {
       console.log(students);
       $('#studentInfo').html("<p>" + students[0].first_name + " " + students[0].last_name + "<br>" + students[0].info);
       //console.log(students[0]);
+      updateCounter();
     }
   });
 
@@ -35,6 +36,7 @@ var displayStudentsLeft = function () {
     now --;
     $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
   }
+  updateCounter();
 };//end displayStudentsLeft
 
 var displayStudentsRight = function() {
@@ -43,7 +45,13 @@ var displayStudentsRight = function() {
   if (now === 17){
     now = 0;
     $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
-  }
+  }else{
   now ++;
   $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
+}
+updateCounter();
+};
+
+var updateCounter = function () {
+  $('.counter').html("<p>" + (now + 1) + "/18</p>")
 };
