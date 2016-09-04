@@ -2,6 +2,7 @@ console.log('sourced');
 //globals
 var students = [];
 var now = 0;
+var timer = 0;
 //runs onload to find students when body is loaded
 var getStudents = function () {
   console.log('in getStudents');
@@ -37,7 +38,6 @@ var displayStudentsLeft = function () {
     now --;
     displayStudent(now);
   }
-  updateCounter();
 };//end displayStudentsLeft
 
 var displayStudentsRight = function() {
@@ -49,8 +49,7 @@ var displayStudentsRight = function() {
   }else{
     now ++;
     displayStudent(now);
-}
-updateCounter();
+  }
 };
 
 var updateCounter = function () {
@@ -65,9 +64,20 @@ var displayButtons = function () {
 
 var displayStudent = function(index){
   now = index;
+  //fade out, then add new info when fadeout is complete
   $('#studentInfo').fadeOut(1000, function(){
     $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
     updateCounter();
   });
   $('#studentInfo').fadeIn(1000);
+  timer = 0;
 };
+
+var moveToNextStudent = setInterval(function(){
+  timer ++;
+  console.log(timer);
+  if (timer === 8){
+    timer = 0;
+  displayStudentsRight();
+  }
+}, 1000);
