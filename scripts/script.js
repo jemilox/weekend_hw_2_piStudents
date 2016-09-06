@@ -65,11 +65,11 @@ var displayButtons = function () {
 var displayStudent = function(index){
   now = index;
   //fade out, then add new info when fadeout is complete
-  $('#studentInfo').fadeOut(1000, function(){
+  $('#studentInfo').fadeOut(500, function(){
     $('#studentInfo').html("<p>" + students[now].first_name + " " + students[now].last_name + "<br>" + students[now].info);
     updateCounter();
   });
-  $('#studentInfo').fadeIn(1000);
+  $('#studentInfo').fadeIn(500);
   timer = 0;
 };
 
